@@ -53,3 +53,4 @@ MIT License（`LICENSE` 参照）。無料で使える。保守はベストエ�
 ## 支援
 
 役に立ったら GitHub Sponsors から支援してもらえると励みになります（リポジトリの Sponsor ボタン、または `.github/FUNDING.yml` 参照）。
+GitHub アカウントが無くても、[Polar のチップページ](https://buy.polar.sh/polar_cl_BOe4K4TOobTs8OMsZXgl50XUbXUyXalCr0nxV3jPbbm) から金額自由（$1〜）で支援できます。
