@@ -78,6 +78,7 @@
     <a class="nl" href="#tools">Components</a>
     <a class="nl" href="#start">Get started</a>
     <a class="nl" href="#safety">Safety</a>
+    <a class="nl" href="#compare">Compare</a>
     <a class="nl" href="index.html">日本語</a>
     <a class="nl" href="https://github.com/thanatos333/agent-hands-kit">GitHub</a>
   </div>
@@ -153,6 +154,21 @@ dotnet publish components/desktop-agent -c Release -o $env:USERPROFILE\tools\des
       <li><b>Machine-checkable results</b> <span>— success is judged by a final-line <code>*_OK</code> / <code>*_FAILED</code> marker, not by prose; long output is spilled to files.</span></li>
       <li><b>Your PC, your AI</b> <span>— not a tool for operating someone else's machine, or for automation that breaks a service's terms.</span></li>
     </ul>
+  </section>
+
+  <section id="compare">
+    <h2>How it differs from CLI-Anything</h2>
+    <p class="sub">The big prior project in this space is <a href="https://github.com/HKUDS/CLI-Anything">CLI-Anything</a> (University of Hong Kong). Same goal — letting AI agents use real apps — but the opposite approach.</p>
+    <table>
+      <tr><th style="width:20%"></th><th style="width:40%">Agent Hands Kit</th><th>CLI-Anything</th></tr>
+      <tr><td><b>Approach</b></td><td>Operates the human-facing side — the desktop GUI — directly, with script wrappers where an app offers them</td><td class="c">Auto-generates a CLI that connects to the app's back end (scripting engine / internal API)</td></tr>
+      <tr><td><b>Coverage</b></td><td>Anything with a GUI, including apps and web services with no back-end API at all</td><td class="c">Only apps that have a scriptable back end or an API</td></tr>
+      <tr><td><b>Runtime</b></td><td>Windows-native: PowerShell plus a single-file exe</td><td class="c">Python plus a generated harness; on Windows it needs Git Bash / WSL</td></tr>
+      <tr><td><b>Freedom</b></td><td>You write whole scripts, so the ceiling is the app's full capability</td><td class="c">Limited to the commands the harness provides</td></tr>
+      <tr><td><b>Footprint</b></td><td>One .ps1 file and one exe; near-zero dependencies, and you can fix it yourself</td><td class="c">State management, a REPL and a test suite — a bigger machine</td></tr>
+      <tr><td><b>Strength</b></td><td>GUI-only apps, lightness, freedom</td><td class="c">Breadth (40+ prebuilt harnesses) and tested, reproducible commands</td></tr>
+    </table>
+    <p style="color:var(--muted)">For standardized, repeatable operations on supported apps, CLI-Anything is a solid choice. If you want to drive everything on Windows — including GUI-only apps — lightly and freely, take Agent Hands Kit.</p>
   </section>
 
   <section id="support">

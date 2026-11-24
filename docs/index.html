@@ -78,6 +78,7 @@
     <a class="nl" href="#tools">構成</a>
     <a class="nl" href="#start">使い方</a>
     <a class="nl" href="#safety">安全設計</a>
+    <a class="nl" href="#compare">比較</a>
     <a class="nl" href="en.html">English</a>
     <a class="nl" href="https://github.com/thanatos333/agent-hands-kit">GitHub</a>
   </div>
@@ -153,6 +154,21 @@ dotnet publish components/desktop-agent -c Release -o $env:USERPROFILE\tools\des
       <li><b>結果はマーカーで判定</b> <span>— 出力本文ではなく最終行の <code>*_OK</code> / <code>*_FAILED</code> で成否を機械判定し、長い出力はファイルへ逃がす。</span></li>
       <li><b>自分のPCを、自分のAIに</b> <span>— 他人のPCの操作や、規約に反する自動化のための道具ではありません。</span></li>
     </ul>
+  </section>
+
+  <section id="compare">
+    <h2>CLI-Anything との違い</h2>
+    <p class="sub">「AIエージェントにアプリを使わせる」道具には、香港大学の <a href="https://github.com/HKUDS/CLI-Anything">CLI-Anything</a> という大きな先行プロジェクトがあります。目的は同じでも、攻め方が逆です。</p>
+    <table>
+      <tr><th style="width:20%"></th><th style="width:40%">Agent Hands Kit</th><th>CLI-Anything</th></tr>
+      <tr><td><b>攻め方</b></td><td>人間用の表側（デスクトップGUI）をそのまま操作する。スクリプト実行できるアプリにはラッパーも併用</td><td class="c">アプリの裏側（スクリプト基盤・内部API）に接続する CLI を自動生成する</td></tr>
+      <tr><td><b>操作できる範囲</b></td><td>GUI さえあれば何でも。裏側に API の無いアプリや Web サービスも対象</td><td class="c">スクリプト基盤や API のあるアプリだけ（無いアプリは包めない）</td></tr>
+      <tr><td><b>実行環境</b></td><td>Windows ネイティブ。PowerShell と単一ファイル exe だけ</td><td class="c">Python ＋生成ハーネス一式。Windows では Git Bash / WSL が必要</td></tr>
+      <tr><td><b>自由度</b></td><td>スクリプトを丸ごと書けるので、上限はアプリの全機能そのもの</td><td class="c">あらかじめ用意されたコマンドの範囲内</td></tr>
+      <tr><td><b>重さ</b></td><td>.ps1 1枚＋exe 1個。依存ほぼゼロ、壊れても自分で直せる</td><td class="c">状態管理・REPL・テスト基盤込みの分、仕組みは大きい</td></tr>
+      <tr><td><b>強み</b></td><td>GUI しかないアプリを触れること、軽さ、自由度</td><td class="c">対応アプリの多さ（40+）、テスト済みコマンドの再現性</td></tr>
+    </table>
+    <p style="color:var(--muted)">対応表とテストが揃った定型運用なら CLI-Anything も良い選択です。Windows で、画面しかないアプリまで含めて軽く・自由に使いたいなら Agent Hands Kit をどうぞ。</p>
   </section>
 
   <section id="support">
