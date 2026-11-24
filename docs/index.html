@@ -76,6 +76,7 @@
     <a class="brand" href="./">Agent Hands Kit</a>
     <span class="sp"></span>
     <a class="nl" href="#tools">構成</a>
+    <a class="nl" href="#example">実例</a>
     <a class="nl" href="#start">使い方</a>
     <a class="nl" href="#safety">安全設計</a>
     <a class="nl" href="#compare">比較</a>
@@ -130,9 +131,24 @@
       <tr><td><code>desktop-agent/</code></td><td class="c">C# / .NET デスクトップGUIエージェント本体＋詳細README＋素通しクライアント <code>desktop.ps1</code>。localhost＋トークン認証のみ</td></tr>
       <tr><td><code>app-wrappers/</code></td><td class="c">制作アプリのバッチ実行ラッパー7本（Blender / Inkscape / GIMP / FreeCAD / KiCad / LTspice / img-peek）</td></tr>
       <tr><td><code>powershell-tools/</code></td><td class="c">委任・ジョブ・ロック・Web読み・全文検索・自己スケジュール等の道具12本</td></tr>
+      <tr><td><code>voicevox-harness/</code></td><td class="c">VOICEVOXをGUIなし（エンジンAPI）で操作する音声合成ハーネス。アクセント/ピッチ計画の表示と、出力WAVのF0実測検証付き</td></tr>
       <tr><td><code>notification-watcher/</code></td><td class="c">Windows通知をイベント入口にする補助ツール</td></tr>
       <tr><td><code>patterns/ ・ mailbox/</code></td><td class="c">委任ハーネスの設計パターンと、ファイル郵便ポストの設計・テンプレート</td></tr>
     </table>
+  </section>
+
+  <section id="example">
+    <h2>実例：デモ動画の制作、全部AIで</h2>
+    <p class="sub">オープンソースCAD「SolidCraft」のデモ動画は、撮影からナレーション付けまで、すべてAIエージェントがこのキットの道具で実行しました。</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <img src="assets/example-hinge.jpg" alt="AIエージェントがSolidCraftでモデリングした蝶番" style="flex:1 1 320px;min-width:280px;width:100%;border-radius:10px;border:1px solid rgba(128,128,128,.35)">
+      <img src="assets/example-narration.jpg" alt="自動作成された図面とテロップ" style="flex:1 1 320px;min-width:280px;width:100%;border-radius:10px;border:1px solid rgba(128,128,128,.35)">
+    </div>
+    <ul class="principles" style="margin-top:16px">
+      <li><b>撮影</b> <span>— デスクトップエージェントが SolidCraft を操作する AI（Claude）の作業を画面録画。蝶番のモデリング、回転ジョイントの確認、図面作成までを収録し、テロップを付けて編集。</span></li>
+      <li><b>ナレーション</b> <span>— <code>voicevox-harness</code>（vv-say）が VOICEVOX を GUI なしで操作し、テロップの内容に合わせた解説音声をシーンごとに生成。出力は F0 実測で検証済み。</span></li>
+      <li><b>完成</b> <span>— 解説音声をシーンの開始位置に合わせて合成し、ナレーション入りの動画として完成。原稿作成も含め、人の手は指示だけです。</span></li>
+    </ul>
   </section>
 
   <section id="start">

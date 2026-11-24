@@ -76,6 +76,7 @@
     <a class="brand" href="en.html">Agent Hands Kit</a>
     <span class="sp"></span>
     <a class="nl" href="#tools">Components</a>
+    <a class="nl" href="#example">In practice</a>
     <a class="nl" href="#start">Get started</a>
     <a class="nl" href="#safety">Safety</a>
     <a class="nl" href="#compare">Compare</a>
@@ -130,9 +131,24 @@
       <tr><td><code>desktop-agent/</code></td><td class="c">The C# / .NET desktop GUI agent, its detailed README, and the thin client <code>desktop.ps1</code>. Localhost + token auth only</td></tr>
       <tr><td><code>app-wrappers/</code></td><td class="c">Seven batch wrappers (Blender / Inkscape / GIMP / FreeCAD / KiCad / LTspice / img-peek)</td></tr>
       <tr><td><code>powershell-tools/</code></td><td class="c">Twelve tools: delegation, jobs, locking, web reading, full-text search, self-scheduling, and more</td></tr>
+      <tr><td><code>voicevox-harness/</code></td><td class="c">Drives the VOICEVOX speech engine through its API (no GUI): accent/pitch plan display plus F0-measured verification of the output</td></tr>
       <tr><td><code>notification-watcher/</code></td><td class="c">Turns Windows notifications into an event source for agents</td></tr>
       <tr><td><code>patterns/ · mailbox/</code></td><td class="c">The delegation harness pattern, plus the file-mailbox design and templates</td></tr>
     </table>
+  </section>
+
+  <section id="example">
+    <h2>In practice: a demo video, made entirely by AI</h2>
+    <p class="sub">This demo video for the open-source CAD "SolidCraft" was produced end to end by AI agents using this kit — from screen recording to narration.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <img src="assets/example-hinge.jpg" alt="A hinge modeled in SolidCraft by an AI agent" style="flex:1 1 320px;min-width:280px;width:100%;border-radius:10px;border:1px solid rgba(128,128,128,.35)">
+      <img src="assets/example-narration.jpg" alt="The automatically created drawing with captions" style="flex:1 1 320px;min-width:280px;width:100%;border-radius:10px;border:1px solid rgba(128,128,128,.35)">
+    </div>
+    <ul class="principles" style="margin-top:16px">
+      <li><b>Recording</b> <span>— The desktop agent screen-recorded another AI (Claude) operating SolidCraft: modeling a hinge, checking its revolute joint, and creating the drawing. Captions were added in editing.</span></li>
+      <li><b>Narration</b> <span>— The <code>voicevox-harness</code> (vv-say) drove VOICEVOX without its GUI and generated scene-by-scene commentary matched to the captions, verified by measuring the output's F0 contour.</span></li>
+      <li><b>Assembly</b> <span>— The narration was placed at each scene's start and mixed into the final video. Scriptwriting included — the only human input was the instructions.</span></li>
+    </ul>
   </section>
 
   <section id="start">

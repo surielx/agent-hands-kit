@@ -2,7 +2,7 @@
 
 **AIエージェントに「手足と目」を与え、AI同士を人間用の入り口経由でつなぐための実運用ツール群。**
 
-> 状態：v0.1 公開中（2026-11-24）。無料・オープンソース（MIT ライセンス）。
+> 状態：v0.2 公開中（2026-11-25、v0.1 は 2026-11-24）。無料・オープンソース（MIT ライセンス）。v0.2 で VOICEVOX をエンジン API で操作する `voicevox-harness` を追加。
 > 公式サイト：https://thanatos333.github.io/agent-hands-kit/
 > 本体はすべて実運用で使われている道具のサニタイズ済みコピーで、個人パス・固有名・秘密情報は除去してある。
 
@@ -25,6 +25,7 @@
 | `components/desktop-agent/` | C# / .NET デスクトップGUIエージェント本体＋詳細README＋素通しクライアント `desktop.ps1` | ソース一式あり（パス汎用化済み） |
 | `components/powershell-tools/` | PowerShell道具群（委任・ジョブ・ロック・Web読み・文書抽出・全文検索・自己スケジュール等）＋ `INDEX.md` | 12本（`$env:AGENT_HOME` へ汎用化済み） |
 | `components/app-wrappers/` | 制作アプリのバッチ実行ラッパー（Blender / Inkscape / GIMP / FreeCAD / KiCad / LTspice）＋画像プレビュー `img-peek` | 7本＋ `INDEX.md`。実アプリをヘッドレス実行し、成果物で成否判定 |
+| `components/voicevox-harness/` | VOICEVOXをGUIなし（エンジンAPI）で操作する音声合成ハーネス。アクセント/ピッチ計画の表示と、出力WAVのF0実測検証付き | `vv_harness.py`＋`vv-say.ps1`。VOICEVOX本体とPython（numpy/soundfile）が必要 |
 | `components/notification-watcher/` | Windows通知をイベント入口にする補助ツール | ソースあり（保存先は環境変数で変更可） |
 | `patterns/` | 委任ハーネス等の再利用パターン文書 | あり |
 | `mailbox/` | ファイル郵便ポストの設計とテンプレート | あり |
