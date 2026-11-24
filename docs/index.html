@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Hands Kit — AIエージェントに、手足と目を。</title>
+<meta name="description" content="WindowsのデスクトップGUI操作、制作アプリのヘッドレス実行、AI同士の連携を実現する実運用ツール群。無料・オープンソース（MIT）。">
+<style>
+  :root{
+    --bg:#0b0e14; --surface:#12161f; --surface2:#171c28; --border:#232a3a;
+    --text:#e8ecf3; --muted:#9aa7ba; --accent:#58a6ff; --accent2:#3fb950;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic UI",Meiryo,system-ui,sans-serif;
+    line-height:1.75;font-size:16px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header.site{position:sticky;top:0;background:rgba(11,14,20,.88);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);z-index:10}
+  .nav{display:flex;align-items:center;gap:22px;height:60px}
+  .brand{font-weight:700;font-size:17px;color:var(--text);letter-spacing:.02em}
+  .brand:hover{text-decoration:none}
+  .nav .sp{flex:1}
+  .nav a.nl{color:var(--muted);font-size:14px}
+  .nav a.nl:hover{color:var(--text);text-decoration:none}
+  .btn{display:inline-block;padding:10px 22px;border-radius:10px;font-weight:600;font-size:15px;
+    border:1px solid var(--border);color:var(--text);background:var(--surface2)}
+  .btn:hover{text-decoration:none;border-color:var(--accent)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:#4793e8}
+  .hero{padding:84px 0 64px;text-align:center}
+  .hero h1{font-size:42px;line-height:1.35;margin:0 0 18px;font-weight:800;letter-spacing:.01em}
+  .hero p.lead{color:var(--muted);font-size:18px;max-width:720px;margin:0 auto 34px}
+  .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .badges{margin-top:26px;color:var(--muted);font-size:13px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .badge{border:1px solid var(--border);border-radius:999px;padding:3px 12px;background:var(--surface)}
+  section{padding:52px 0 8px}
+  h2{font-size:26px;margin:0 0 8px;font-weight:700}
+  h2 + p.sub{color:var(--muted);margin:0 0 26px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+  .card h3{margin:0 0 8px;font-size:18px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .card .tag{display:inline-block;font-size:12px;color:var(--accent2);border:1px solid var(--border);
+    border-radius:999px;padding:1px 10px;margin-bottom:12px;background:var(--surface2)}
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);overflow:hidden;font-size:15px}
+  th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  th{background:var(--surface2);font-weight:600}
+  tr:last-child td{border-bottom:none}
+  td.c{color:var(--muted)}
+  code{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:1px 7px;
+    font-family:"Cascadia Code",Consolas,monospace;font-size:13.5px}
+  pre{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 20px;overflow-x:auto;font-size:14px;line-height:1.7}
+  pre code{background:none;border:none;padding:0}
+  ul.principles{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+  ul.principles li{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px}
+  ul.principles b{color:var(--text)}
+  ul.principles span{color:var(--muted)}
+  .support{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:30px;text-align:center;margin:20px 0 0}
+  .support p{color:var(--muted);margin:6px 0 20px}
+  footer{border-top:1px solid var(--border);margin-top:64px;padding:28px 0 40px;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  @media (max-width:640px){.hero h1{font-size:31px}.hero{padding:56px 0 44px}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="./">Agent Hands Kit</a>
+    <span class="sp"></span>
+    <a class="nl" href="#tools">構成</a>
+    <a class="nl" href="#start">使い方</a>
+    <a class="nl" href="#safety">安全設計</a>
+    <a class="nl" href="en.html">English</a>
+    <a class="nl" href="https://github.com/thanatos333/agent-hands-kit">GitHub</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>AIエージェントに、手足と目を。</h1>
+    <p class="lead">クラウドAIの実行環境には、外から直接つなぐ入り口がありません。Agent Hands Kit は発想を変え、<b>人間用の入り口（デスクトップGUI・チャット・共有フォルダ）をAIが使える手足でそのまま使う</b>ための、実運用で鍛えたツール群です。</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/thanatos333/agent-hands-kit">GitHub で見る</a>
+      <a class="btn" href="https://github.com/sponsors/thanatos333">♥ 支援する</a>
+    </div>
+    <div class="badges">
+      <span class="badge">無料・オープンソース</span>
+      <span class="badge">MIT License</span>
+      <span class="badge">Windows 10 / 11</span>
+      <span class="badge">実運用で検証済み</span>
+    </div>
+  </div>
+
+  <section id="pillars">
+    <h2>3つの柱</h2>
+    <p class="sub">バラバラの小道具ではなく、「見て・操作し・受け渡す」ための一式です。</p>
+    <div class="cards">
+      <div class="card">
+        <span class="tag">Desktop Agent</span>
+        <h3>GUIの手足</h3>
+        <p>Windowsの対話デスクトップを「見て→要素を指定して操作する」常駐エージェント。UI Automation のスナップショット（差分・刈り込みでトークン節約）、スクリーンショット、貼り付け／打鍵の二方式入力。裏側APIの無いアプリまで操作できます。</p>
+      </div>
+      <div class="card">
+        <span class="tag">App Wrappers</span>
+        <h3>制作アプリの実行腕</h3>
+        <p>Blender / Inkscape / GIMP / FreeCAD / KiCad / LTspice をヘッドレスにスクリプト実行するラッパー群。成否は終了コードでなく「宣言した成果物ができたか」で判定します。画像の目視確認を軽くする <code>img-peek</code> 付き。</p>
+      </div>
+      <div class="card">
+        <span class="tag">Tools &amp; Patterns</span>
+        <h3>連携と委任の型</h3>
+        <p>PowerShell道具12本（委任・ジョブ管理・ロック・Web読み・文書抽出ほか）、共有フォルダを指示と成果物の受け渡し場所にする「ファイル郵便ポスト」、長い作業を別AIへ渡す「委任ハーネス」の設計パターン。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <h2>構成</h2>
+    <p class="sub">リポジトリの <code>components/</code> 配下に、部品ごとに分かれています。</p>
+    <table>
+      <tr><th style="width:30%">部品</th><th>内容</th></tr>
+      <tr><td><code>desktop-agent/</code></td><td class="c">C# / .NET デスクトップGUIエージェント本体＋詳細README＋素通しクライアント <code>desktop.ps1</code>。localhost＋トークン認証のみ</td></tr>
+      <tr><td><code>app-wrappers/</code></td><td class="c">制作アプリのバッチ実行ラッパー7本（Blender / Inkscape / GIMP / FreeCAD / KiCad / LTspice / img-peek）</td></tr>
+      <tr><td><code>powershell-tools/</code></td><td class="c">委任・ジョブ・ロック・Web読み・全文検索・自己スケジュール等の道具12本</td></tr>
+      <tr><td><code>notification-watcher/</code></td><td class="c">Windows通知をイベント入口にする補助ツール</td></tr>
+      <tr><td><code>patterns/ ・ mailbox/</code></td><td class="c">委任ハーネスの設計パターンと、ファイル郵便ポストの設計・テンプレート</td></tr>
+    </table>
+  </section>
+
+  <section id="start">
+    <h2>使い方</h2>
+    <p class="sub">前提は Windows 10/11、.NET 10 SDK、PowerShell 5.1 以降です。</p>
+    <pre><code>git clone https://github.com/thanatos333/agent-hands-kit.git
+
+# Desktop Agent のビルドと配置（単一ファイル exe）
+dotnet publish components/desktop-agent -c Release -o $env:USERPROFILE\tools\desktop-agent</code></pre>
+    <p style="color:var(--muted)">トークンの生成、常駐タスクの登録、道具の配置先などの詳しい手順は、リポジトリ内の <a href="https://github.com/thanatos333/agent-hands-kit">README</a> と各部品のドキュメントにあります。任意で Tailscale 等のプライベートネットワーク（クラウドAI⇔PCの接続）、Google Drive 等の共有ストレージ（郵便ポスト）を組み合わせます。</p>
+  </section>
+
+  <section id="safety">
+    <h2>安全設計</h2>
+    <p class="sub">強い権限を持つ道具だからこそ、境界を先に決めてあります。詳細はリポジトリの <code>SECURITY.md</code> へ。</p>
+    <ul class="principles">
+      <li><b>外に開かない</b> <span>— Desktop Agent は 127.0.0.1 のみで待ち受け、トークン認証必須。トークンは利用者本人のみ読める場所に置く。</span></li>
+      <li><b>確認は要所だけ</b> <span>— 送信先とフォアグラウンドの確認（前1回）と、実行後の表示確認（1回）に絞る設計。速度と安全の両立を実運用で調整した結果です。</span></li>
+      <li><b>結果はマーカーで判定</b> <span>— 出力本文ではなく最終行の <code>*_OK</code> / <code>*_FAILED</code> で成否を機械判定し、長い出力はファイルへ逃がす。</span></li>
+      <li><b>自分のPCを、自分のAIに</b> <span>— 他人のPCの操作や、規約に反する自動化のための道具ではありません。</span></li>
+    </ul>
+  </section>
+
+  <section id="support">
+    <div class="support">
+      <h2 style="margin-bottom:4px">無料で公開しています</h2>
+      <p>ライセンスは MIT、販売はしません。役に立ったら、GitHub Sponsors からの支援（お布施）が励みになります。<br>保守はベストエフォートで、動作保証はありません。</p>
+      <a class="btn primary" href="https://github.com/sponsors/thanatos333">♥ GitHub Sponsors</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 thanatos333</span>
+    <span>MIT License</span>
+    <span style="flex:1"></span>
+    <a href="https://github.com/thanatos333/agent-hands-kit">GitHub</a>
+    <a href="en.html">English</a>
+  </div>
+</footer>
+</body>
+</html>
