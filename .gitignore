@@ -1,0 +1,15 @@
+# secrets and runtime state - never publish
+token.txt
+*.token
+shots/
+logs/
+out-overflow/
+jobs/
+fetched/
+hidden_incoming/
+.env
+
+# .NET build output
+bin/
+obj/
+*.user
