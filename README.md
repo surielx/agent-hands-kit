@@ -2,7 +2,7 @@
 
 **AIエージェントに「手足と目」を与え、AI同士を人間用の入り口経由でつなぐための実運用ツール群。**
 
-> 状態：v0.2 公開中（2026-11-25、v0.1 は 2026-11-24）。無料・オープンソース（MIT ライセンス）。v0.2 で VOICEVOX をエンジン API で操作する `voicevox-harness` を追加。
+> 状態：v0.3 公開中（2026-11-25）。無料・オープンソース（MIT ライセンス）。v0.2 で VOICEVOX をエンジン API で操作する `voicevox-harness` を追加、v0.3 で初心者向け導入ガイド（SETUP.md＋公式サイトの日英ガイドページ）を追加。過去の版は [Releases](https://github.com/thanatos333/agent-hands-kit/releases) からダウンロードできます。
 > 公式サイト：https://thanatos333.github.io/agent-hands-kit/
 > 本体はすべて実運用で使われている道具のサニタイズ済みコピーで、個人パス・固有名・秘密情報は除去してある。
 
