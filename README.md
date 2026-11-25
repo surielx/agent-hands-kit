@@ -6,6 +6,10 @@
 > 公式サイト：https://thanatos333.github.io/agent-hands-kit/
 > 本体はすべて実運用で使われている道具のサニタイズ済みコピーで、個人パス・固有名・秘密情報は除去してある。
 
+![An AI agent modelling a hinge in a CAD app, driven only through this kit](docs/assets/demo-hinge.gif)
+
+*An AI agent modelling a hinge in a CAD app (SolidCraft), driven only through this kit — [full video with narration](https://youtu.be/olbPBROgM3w). ／ このキットだけでAIエージェントがCADを操作し、蝶番をモデリングしている様子（[ナレーション付き動画](https://youtu.be/olbPBROgM3w)）*
+
 ## Getting started — 導入はこちら
 
 **New here? Start with the [Setup Guide (SETUP.md)](SETUP.md).** It covers three ways to install, from easiest to most manual:
