@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Setup Guide — Agent Hands Kit</title>
+<meta name="description" content="How to install Agent Hands Kit on a Windows PC, explained for AI beginners: let an AI do it, let a chat AI coach you, or follow the manual steps.">
+<style>
+  :root{
+    --bg:#0b0e14; --surface:#12161f; --surface2:#171c28; --border:#232a3a;
+    --text:#e8ecf3; --muted:#9aa7ba; --accent:#58a6ff; --accent2:#3fb950;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic UI",Meiryo,system-ui,sans-serif;
+    line-height:1.75;font-size:16px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header.site{position:sticky;top:0;background:rgba(11,14,20,.88);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);z-index:10}
+  .nav{display:flex;align-items:center;gap:22px;height:60px}
+  .brand{font-weight:700;font-size:17px;color:var(--text);letter-spacing:.02em}
+  .brand:hover{text-decoration:none}
+  .nav .sp{flex:1}
+  .nav a.nl{color:var(--muted);font-size:14px}
+  .nav a.nl:hover{color:var(--text);text-decoration:none}
+  .btn{display:inline-block;padding:10px 22px;border-radius:10px;font-weight:600;font-size:15px;
+    border:1px solid var(--border);color:var(--text);background:var(--surface2)}
+  .btn:hover{text-decoration:none;border-color:var(--accent)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:#4793e8}
+  section{padding:44px 0 8px}
+  h1{font-size:34px;line-height:1.4;margin:0 0 12px;font-weight:800}
+  h2{font-size:25px;margin:0 0 8px;font-weight:700}
+  h3{font-size:19px;margin:26px 0 6px;font-weight:700}
+  h2 + p.sub, h1 + p.sub{color:var(--muted);margin:0 0 24px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+  .card h3{margin:0 0 8px;font-size:18px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .card .tag{display:inline-block;font-size:12px;color:var(--accent2);border:1px solid var(--border);
+    border-radius:999px;padding:1px 10px;margin-bottom:12px;background:var(--surface2)}
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);overflow:hidden;font-size:15px}
+  th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  th{background:var(--surface2);font-weight:600}
+  tr:last-child td{border-bottom:none}
+  td.c{color:var(--muted)}
+  code{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:1px 7px;
+    font-family:"Cascadia Code",Consolas,monospace;font-size:13.5px}
+  pre{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 20px;overflow-x:auto;font-size:14px;line-height:1.7}
+  pre code{background:none;border:none;padding:0}
+  .prompt{background:#0e1622;border:1px solid var(--accent);border-radius:var(--radius);
+    padding:18px 20px;font-size:15px;line-height:1.8;white-space:pre-wrap;word-break:break-word}
+  .prompt .lbl{display:block;font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.06em;margin-bottom:8px}
+  ol.steps{list-style:none;counter-reset:st;padding:0;margin:0;display:grid;gap:14px}
+  ol.steps > li{counter-increment:st;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:18px 20px 18px 64px;position:relative}
+  ol.steps > li::before{content:counter(st);position:absolute;left:18px;top:16px;width:30px;height:30px;
+    border-radius:50%;background:var(--accent);color:#fff;font-weight:700;text-align:center;line-height:30px}
+  ol.steps > li b.t{display:block;font-size:16.5px;margin-bottom:4px}
+  ol.steps > li p{margin:6px 0;color:var(--muted);font-size:15px}
+  ol.steps > li pre{margin:10px 0 4px}
+  .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;margin:6px 0 4px}
+  .flow .box{flex:1 1 180px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:16px 18px;text-align:center}
+  .flow .box b{display:block;font-size:16px;margin-bottom:4px}
+  .flow .box span{color:var(--muted);font-size:13.5px}
+  .flow .arr{align-self:center;color:var(--accent);font-size:22px;font-weight:700}
+  .note{background:var(--surface2);border:1px solid var(--border);border-left:4px solid var(--accent2);
+    border-radius:10px;padding:14px 18px;color:var(--muted);font-size:15px;margin:16px 0}
+  .note b{color:var(--text)}
+  ul.check{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  ul.check li{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px}
+  ul.check li::before{content:"✓ ";color:var(--accent2);font-weight:700}
+  footer{border-top:1px solid var(--border);margin-top:64px;padding:28px 0 40px;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  @media (max-width:640px){h1{font-size:27px}.flow .arr{transform:rotate(90deg);margin:0 auto}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="en.html">Agent Hands Kit</a>
+    <span class="sp"></span>
+    <a class="nl" href="en.html#tools">Components</a>
+    <a class="nl" href="en.html#example">In practice</a>
+    <a class="nl" href="en-setup.html">Setup guide</a>
+    <a class="nl" href="setup.html">日本語</a>
+    <a class="nl" href="https://github.com/thanatos333/agent-hands-kit">GitHub</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <section>
+    <h1>Setup Guide</h1>
+    <p class="sub">How to install Agent Hands Kit on a Windows PC and hand your AI a pair of hands and eyes. No advanced knowledge needed — there are three ways in, and they all end at the same place.</p>
+    <div class="flow">
+      <div class="box"><b>You</b><span>just pick a way</span></div>
+      <div class="arr">→</div>
+      <div class="box"><b>A: Let an AI do it</b><span>paste a link, say one sentence</span></div>
+      <div class="box"><b>B: Let an AI coach you</b><span>chat, one step at a time</span></div>
+      <div class="box"><b>C: Do it yourself</b><span>follow the steps</span></div>
+      <div class="arr">→</div>
+      <div class="box"><b>Done</b><span>your AI can operate the PC</span></div>
+    </div>
+  </section>
+
+  <section id="need">
+    <h2>What you need</h2>
+    <p class="sub">Only a Windows PC and an internet connection are required. The apps are "install only what you want to use".</p>
+    <table>
+      <tr><th style="width:32%">Item</th><th>Notes</th></tr>
+      <tr><td><b>A Windows 10/11 PC</b></td><td class="c">Required. Be logged in as an administrator for setup.</td></tr>
+      <tr><td><b>Internet access</b></td><td class="c">To download the kit and the .NET SDK.</td></tr>
+      <tr><td><b>.NET 10 SDK</b> (free)</td><td class="c">Needed to build the Desktop Agent. With Way A, the AI installs it for you.</td></tr>
+      <tr><td>Blender / Inkscape / GIMP / FreeCAD / KiCad / LTspice</td><td class="c">Optional. Install only the apps you want the AI to run; the wrappers find them automatically.</td></tr>
+      <tr><td>VOICEVOX</td><td class="c">Optional, only for the speech harness. Install from the official VOICEVOX site.</td></tr>
+      <tr><td>Python 3</td><td class="c">Optional, for the VOICEVOX harness (plus two libraries).</td></tr>
+    </table>
+  </section>
+
+  <section id="way-a">
+    <h2>Way A — Let an AI agent do it (easiest)</h2>
+    <p class="sub">If you have an AI that can run commands on your PC — Claude Code, the Claude desktop app's coding features, OpenAI Codex, or a local LLM with shell access — this is the shortest path. Prepare the PC, paste the link, and say one sentence.</p>
+    <div class="prompt"><span class="lbl">COPY, PASTE, DONE</span>Read the setup guide at https://github.com/thanatos333/agent-hands-kit/blob/main/SETUP.md and set up Agent Hands Kit on this Windows PC, following "Way C" in that guide. Rules: work step by step; after each component, run its verification check and show me the result line (success lines end with _OK). Do not skip the Desktop Agent screenshot test. If a step fails, show me the error and your fix before continuing. When everything is done, give me a short summary of what is installed and where.</div>
+    <div class="note"><b>What happens next?</b> The AI fetches the repository, builds the Desktop Agent, registers its startup task, places the tools, and verifies each part. Your job is only to watch and answer if it asks something. Expect a few minutes, most of it the first build.</div>
+  </section>
+
+  <section id="way-b">
+    <h2>Way B — A chat AI as your coach</h2>
+    <p class="sub">Chat-only AIs (ChatGPT, Gemini, Copilot, Claude in a normal chat) <b>cannot touch your PC</b> — but they make excellent coaches. You do the clicking; the AI tells you the next move.</p>
+    <div class="prompt"><span class="lbl">PASTE THIS FIRST</span>You are my setup coach. Read this guide:
+https://github.com/thanatos333/agent-hands-kit/blob/main/SETUP.md
+I will install Agent Hands Kit on my Windows PC following "Way C".
+Guide me ONE step at a time: tell me exactly what to do, wait for me to reply "done" or send a screenshot, then give me the next step. If I paste an error message, explain in plain words what it means and what to do. Do not dump the whole guide at once.</div>
+    <ol class="steps" style="margin-top:18px">
+      <li><b class="t">Follow the AI's instructions, one at a time</b><p>You do the clicking and typing. There is no rush — one step at a time is fine.</p></li>
+      <li><b class="t">When stuck, send a screenshot</b><p>One screenshot beats a paragraph of description. Send one whenever your screen differs from what the AI expects.</p></li>
+      <li><b class="t">Paste the last line at each check</b><p>Every tool in this kit reports its verdict on the last line: success ends with <code>_OK</code>, failure contains <code>_FAILED</code> plus a reason. Paste that line to the AI and it can judge exactly what happened.</p></li>
+    </ol>
+  </section>
+
+  <section id="way-c">
+    <h2>Way C — Manual setup (all steps)</h2>
+    <p class="sub">Install only the parts you will use. The Desktop Agent is the core; everything else is optional and independent. Commands can be pasted into PowerShell as-is.</p>
+
+    <h3>Step 0 — Get the files</h3>
+    <ol class="steps">
+      <li><b class="t">Download the kit</b><p>On the GitHub repository page, click <b>Code → Download ZIP</b> and unzip it anywhere (for example <code>C:\agent-hands-kit</code>). If you have git: <code>git clone https://github.com/thanatos333/agent-hands-kit.git</code> works too.</p></li>
+    </ol>
+
+    <h3>Step 1 — Desktop Agent (the hands and eyes)</h3>
+    <ol class="steps">
+      <li><b class="t">Install the .NET 10 SDK</b><p>Free from Microsoft's site. Afterwards, reopen PowerShell and run <code>dotnet --version</code> — if a version prints, you are good.</p></li>
+      <li><b class="t">Build and place the agent</b><p>Run this inside the unzipped folder. The location is fixed: <code>%USERPROFILE%\tools\desktop-agent\</code>.</p>
+      <pre><code>dotnet publish components\desktop-agent -c Release -o $env:USERPROFILE\tools\desktop-agent</code></pre></li>
+      <li><b class="t">Register the logon task</b><p>The task name must be exactly <code>AronaDesktopAgent</code> — the client looks for that name.</p>
+      <pre><code>$exe = "$env:USERPROFILE\tools\desktop-agent\desktop-agent.exe"
+$action    = New-ScheduledTaskAction -Execute $exe -Argument "serve"
+$trigger   = New-ScheduledTaskTrigger -AtLogOn
+$principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Highest
+Register-ScheduledTask -TaskName "AronaDesktopAgent" -Action $action -Trigger $trigger -Principal $principal
+Start-ScheduledTask -TaskName "AronaDesktopAgent"</code></pre>
+      <p>On first start, the agent creates its own access token automatically — you never need to touch it. A tray icon means it is resident.</p></li>
+      <li><b class="t">Verify (do not skip this one)</b><p>Show the status, then take a test screenshot.</p>
+      <pre><code>&amp; $env:USERPROFILE\tools\desktop-agent\desktop-agent.exe status
+&amp; $env:USERPROFILE\tools\desktop-agent\desktop-agent.exe screenshot --scale 0.5</code></pre>
+      <p>The screenshot lands in <code>%USERPROFILE%\tools\desktop-agent\shots\</code>. Open it: if it shows your desktop, the agent sees. From here, an AI can drive the desktop through <code>desktop.ps1</code>. Full command list: <code>components/desktop-agent/README.md</code> in the repository.</p></li>
+    </ol>
+
+    <h3>Step 2 — PowerShell tools</h3>
+    <ol class="steps">
+      <li><b class="t">Pick a home folder and copy</b><p>For example, create <code>C:\agent-home</code> and copy the contents of <code>components\powershell-tools\</code> and <code>components\app-wrappers\</code> into <code>C:\agent-home\tools\</code>.</p></li>
+      <li><b class="t">Set the AGENT_HOME variable</b><p>The tools use this as their home. Set it once:</p>
+      <pre><code>[Environment]::SetEnvironmentVariable('AGENT_HOME', 'C:\agent-home', 'User')</code></pre></li>
+      <li><b class="t">Try one in a new PowerShell window</b><p>Reopen the window (so it reads the variable), then:</p>
+      <pre><code>powershell -ExecutionPolicy Bypass -File C:\agent-home\tools\tool-help.ps1</code></pre>
+      <p>If Windows says script execution is disabled, the <code>-ExecutionPolicy Bypass</code> flag in the examples handles it per run. The full list is in <code>components/powershell-tools/INDEX.md</code>. A few tools (like <code>delegate.ps1</code>) are working examples from the author's own setup — adapt them before use.</p></li>
+    </ol>
+
+    <h3>Step 3 — App wrappers</h3>
+    <ol class="steps">
+      <li><b class="t">No configuration — test with the image preview</b><p>Wrappers locate installed apps automatically. Start with <code>img-peek</code>, which needs no creative app:</p>
+      <pre><code>powershell -ExecutionPolicy Bypass -File C:\agent-home\tools\img-peek.ps1 -Image C:\path\to\any.png
+# success = the last line starts with IMGPEEK_OK</code></pre></li>
+      <li><b class="t">Run an app you installed</b><p>Example: have Blender execute your script.</p>
+      <pre><code>powershell -ExecutionPolicy Bypass -File C:\agent-home\tools\blender-run.ps1 -Script C:\path\to\your_script.py</code></pre>
+      <p>Success is judged by the declared output files, not just the exit code. Details: <code>components/app-wrappers/INDEX.md</code>.</p></li>
+    </ol>
+
+    <h3>Step 4 — VOICEVOX harness (optional, Japanese speech)</h3>
+    <ol class="steps">
+      <li><b class="t">Prepare VOICEVOX and Python</b><p>Install VOICEVOX from its official site (default location is fine), and have Python 3 ready.</p></li>
+      <li><b class="t">Place the harness and create a virtual environment</b>
+      <pre><code>copy components\voicevox-harness\vv_harness.py C:\agent-home\tools\
+copy components\voicevox-harness\vv-say.ps1   C:\agent-home\tools\
+cd C:\agent-home\tools
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install numpy soundfile</code></pre></li>
+      <li><b class="t">Make it speak</b><p>Speaker 10 is Amahare Hau (normal style). The engine starts automatically if VOICEVOX is not running.</p>
+      <pre><code>powershell -ExecutionPolicy Bypass -File C:\agent-home\tools\vv-say.ps1 -Text "はじめまして。私の声、聞こえてますか？" -Speaker 10
+# success = the last line starts with VV_OK — play the WAV and listen</code></pre>
+      <p>Before synthesising, the harness prints the accent/pitch plan; afterwards it verifies the output by measuring its pitch (F0) contour. Details: <code>components/voicevox-harness/README.md</code>.</p></li>
+    </ol>
+    <div class="note"><b>Notification watcher (optional)</b> — a helper that turns Windows notifications into events for agents. Source: <code>components/notification-watcher/</code>. Safe to skip on day one.</div>
+  </section>
+
+  <section id="connect">
+    <h2>Connecting your AI</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="tag">AI on the same PC</span>
+        <h3>Works as-is</h3>
+        <p>Claude Code, a local LLM, or any agent running on this PC can run the commands above directly. The component READMEs and INDEX files are written to be read by AIs — just point yours at them.</p>
+      </div>
+      <div class="card">
+        <span class="tag">AI in the cloud</span>
+        <h3>It needs one path to the PC</h3>
+        <p>Combine SSH over a private network (e.g. Tailscale) for commands with a shared folder as a "file mailbox" for instructions and results. The Desktop Agent itself is never exposed — it only ever listens inside the PC. The design lives in the repository's <code>mailbox/</code> and <code>patterns/</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="check">
+    <h2>Final check — the two-minute drill</h2>
+    <p class="sub">Whichever way you installed, finish with this.</p>
+    <ul class="check">
+      <li>Take a screenshot with the Desktop Agent and have your AI describe what is on screen</li>
+      <li>Pass that screenshot to <code>img-peek.ps1</code> and confirm the last line is <code>IMGPEEK_OK ...</code></li>
+      <li>(If you installed the VOICEVOX harness) synthesize one line and confirm <code>VV_OK</code></li>
+    </ul>
+    <p style="color:var(--muted)">If all three pass, your AI has eyes and hands. With the kit installed, an AI can even model in a CAD app by itself — see <a href="en.html#example">the worked example</a>.</p>
+    <img src="assets/example-hinge.jpg" alt="A hinge modelled by an AI agent operating a CAD app" style="width:100%;border-radius:10px;border:1px solid rgba(128,128,128,.35)">
+  </section>
+
+  <section id="trouble">
+    <h2>Troubleshooting</h2>
+    <table>
+      <tr><th style="width:34%">Symptom</th><th>What it means / what to do</th></tr>
+      <tr><td><code>dotnet</code> not recognized</td><td class="c">The .NET SDK is not installed, or the window predates the install. Install the SDK and open a new PowerShell window.</td></tr>
+      <tr><td>"Running scripts is disabled"</td><td class="c">Use <code>-ExecutionPolicy Bypass</code> per run (as in the examples), or run <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code> once.</td></tr>
+      <tr><td>"Token file not found" / cannot reach the server</td><td class="c">The Desktop Agent is not running. Start it with <code>Start-ScheduledTask -TaskName "AronaDesktopAgent"</code> and retry.</td></tr>
+      <tr><td>Screenshot refused, mentioning a locked desktop</td><td class="c">By design: the agent refuses to operate while the screen is locked or a UAC secure desktop is showing. Unlock the PC and retry.</td></tr>
+      <tr><td>A wrapper ends with <code>_FAILED</code></td><td class="c">The reason is on that same line (missing app, file, or output). Check it first.</td></tr>
+      <tr><td><code>VV_FAILED no python found</code></td><td class="c">Create the <code>.venv</code> next to <code>vv-say.ps1</code> (Step 4), or set <code>VV_PYTHON</code> to your Python.</td></tr>
+      <tr><td><code>VV_FAILED</code> about the engine</td><td class="c">VOICEVOX is not installed, or its engine failed to start. Start VOICEVOX once by hand, then retry.</td></tr>
+    </table>
+  </section>
+
+  <section id="safety">
+    <h2>About safety</h2>
+    <p style="color:var(--muted)">The Desktop Agent listens only on <code>127.0.0.1</code> (inside your own PC) and requires a per-user token. Every action is logged, and it can be stopped at any time from its tray icon or with a <code>STOP</code> file. It is a tool for <b>your</b> PC and <b>your</b> AI — please read <code>SECURITY.md</code> in the repository before use. The full written guide also lives on GitHub as <a href="https://github.com/thanatos333/agent-hands-kit/blob/main/SETUP.md">SETUP.md</a>.</p>
+    <p><a class="btn primary" href="https://github.com/thanatos333/agent-hands-kit">View on GitHub</a> <a class="btn" href="en.html">Back to top page</a></p>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 thanatos333</span>
+    <span>MIT License</span>
+    <span style="flex:1"></span>
+    <a href="https://github.com/thanatos333/agent-hands-kit">GitHub</a>
+    <a href="setup.html">日本語</a>
+  </div>
+</footer>
+</body>
+</html>

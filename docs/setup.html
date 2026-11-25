@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>導入ガイド — Agent Hands Kit</title>
+<meta name="description" content="Agent Hands Kit の導入手順を、AI初心者にもわかるように3つの方法（AIに任せる／チャットAIに教わる／自分で入れる）で丁寧に解説します。">
+<style>
+  :root{
+    --bg:#0b0e14; --surface:#12161f; --surface2:#171c28; --border:#232a3a;
+    --text:#e8ecf3; --muted:#9aa7ba; --accent:#58a6ff; --accent2:#3fb950;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic UI",Meiryo,system-ui,sans-serif;
+    line-height:1.75;font-size:16px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header.site{position:sticky;top:0;background:rgba(11,14,20,.88);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);z-index:10}
+  .nav{display:flex;align-items:center;gap:22px;height:60px}
+  .brand{font-weight:700;font-size:17px;color:var(--text);letter-spacing:.02em}
+  .brand:hover{text-decoration:none}
+  .nav .sp{flex:1}
+  .nav a.nl{color:var(--muted);font-size:14px}
+  .nav a.nl:hover{color:var(--text);text-decoration:none}
+  .btn{display:inline-block;padding:10px 22px;border-radius:10px;font-weight:600;font-size:15px;
+    border:1px solid var(--border);color:var(--text);background:var(--surface2)}
+  .btn:hover{text-decoration:none;border-color:var(--accent)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:#4793e8}
+  section{padding:44px 0 8px}
+  h1{font-size:34px;line-height:1.4;margin:0 0 12px;font-weight:800}
+  h2{font-size:25px;margin:0 0 8px;font-weight:700}
+  h3{font-size:19px;margin:26px 0 6px;font-weight:700}
+  h2 + p.sub, h1 + p.sub{color:var(--muted);margin:0 0 24px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+  .card h3{margin:0 0 8px;font-size:18px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .card .tag{display:inline-block;font-size:12px;color:var(--accent2);border:1px solid var(--border);
+    border-radius:999px;padding:1px 10px;margin-bottom:12px;background:var(--surface2)}
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);overflow:hidden;font-size:15px}
+  th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  th{background:var(--surface2);font-weight:600}
+  tr:last-child td{border-bottom:none}
+  td.c{color:var(--muted)}
+  code{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:1px 7px;
+    font-family:"Cascadia Code",Consolas,monospace;font-size:13.5px}
+  pre{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 20px;overflow-x:auto;font-size:14px;line-height:1.7}
+  pre code{background:none;border:none;padding:0}
+  .prompt{background:#0e1622;border:1px solid var(--accent);border-radius:var(--radius);
+    padding:18px 20px;font-size:15px;line-height:1.8;white-space:pre-wrap;word-break:break-word}
+  .prompt .lbl{display:block;font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.06em;margin-bottom:8px}
+  ol.steps{list-style:none;counter-reset:st;padding:0;margin:0;display:grid;gap:14px}
+  ol.steps > li{counter-increment:st;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:18px 20px 18px 64px;position:relative}
+  ol.steps > li::before{content:counter(st);position:absolute;left:18px;top:16px;width:30px;height:30px;
+    border-radius:50%;background:var(--accent);color:#fff;font-weight:700;text-align:center;line-height:30px}
+  ol.steps > li b.t{display:block;font-size:16.5px;margin-bottom:4px}
+  ol.steps > li p{margin:6px 0;color:var(--muted);font-size:15px}
+  ol.steps > li pre{margin:10px 0 4px}
+  .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;margin:6px 0 4px}
+  .flow .box{flex:1 1 180px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:16px 18px;text-align:center}
+  .flow .box b{display:block;font-size:16px;margin-bottom:4px}
+  .flow .box span{color:var(--muted);font-size:13.5px}
+  .flow .arr{align-self:center;color:var(--accent);font-size:22px;font-weight:700}
+  .note{background:var(--surface2);border:1px solid var(--border);border-left:4px solid var(--accent2);
+    border-radius:10px;padding:14px 18px;color:var(--muted);font-size:15px;margin:16px 0}
+  .note b{color:var(--text)}
+  ul.check{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  ul.check li{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px}
+  ul.check li::before{content:"✓ ";color:var(--accent2);font-weight:700}
+  footer{border-top:1px solid var(--border);margin-top:64px;padding:28px 0 40px;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  @media (max-width:640px){h1{font-size:27px}.flow .arr{transform:rotate(90deg);margin:0 auto}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="./">Agent Hands Kit</a>
+    <span class="sp"></span>
+    <a class="nl" href="index.html#tools">構成</a>
+    <a class="nl" href="index.html#example">実例</a>
+    <a class="nl" href="setup.html">導入ガイド</a>
+    <a class="nl" href="en-setup.html">English</a>
+    <a class="nl" href="https://github.com/thanatos333/agent-hands-kit">GitHub</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <section>
+    <h1>導入ガイド</h1>
+    <p class="sub">Agent Hands Kit を Windows PC に入れて、あなたのAIに「手足と目」を渡すまでの手順です。むずかしい知識はいりません。方法は3つ、行き着く先は同じです。</p>
+    <div class="flow">
+      <div class="box"><b>あなた</b><span>方法を1つ選ぶだけ</span></div>
+      <div class="arr">→</div>
+      <div class="box"><b>A：AIに任せる</b><span>リンクを貼って一言</span></div>
+      <div class="box"><b>B：AIに教わる</b><span>チャットで一歩ずつ</span></div>
+      <div class="box"><b>C：自分で入れる</b><span>手順どおりに</span></div>
+      <div class="arr">→</div>
+      <div class="box"><b>導入完了</b><span>AIがPCを操作できる</span></div>
+    </div>
+  </section>
+
+  <section id="need">
+    <h2>用意するもの</h2>
+    <p class="sub">必須は Windows PC とインターネットだけ。アプリ類は「使いたいものだけ」で大丈夫です。</p>
+    <table>
+      <tr><th style="width:32%">もの</th><th>備考</th></tr>
+      <tr><td><b>Windows 10 / 11 のPC</b></td><td class="c">必須。セットアップ時は管理者アカウントでログインしてください</td></tr>
+      <tr><td><b>インターネット接続</b></td><td class="c">キットと .NET SDK のダウンロードに使います</td></tr>
+      <tr><td><b>.NET 10 SDK</b>（無料）</td><td class="c">Desktop Agent のビルドに必要。方法AならAIが入れてくれます</td></tr>
+      <tr><td>Blender / Inkscape / GIMP / FreeCAD / KiCad / LTspice</td><td class="c">任意。AIに使わせたいアプリだけ、普通にインストールしておけばOK（場所は自動で見つけます）</td></tr>
+      <tr><td>VOICEVOX</td><td class="c">任意。音声合成ハーネスを使う場合のみ。公式サイトからインストール</td></tr>
+      <tr><td>Python 3</td><td class="c">任意。VOICEVOXハーネス用（ライブラリ2つを追加します）</td></tr>
+    </table>
+  </section>
+
+  <section id="way-a">
+    <h2>方法A：AIに任せる（いちばん簡単）</h2>
+    <p class="sub">PC上でコマンドを実行できるAI（Claude Code、Claude のデスクトップアプリのコーディング機能、OpenAI Codex、ターミナルを使えるローカルLLM等）を持っているなら、これが最短です。PCを用意して、リンクを貼って、一言頼むだけです。</p>
+    <div class="prompt"><span class="lbl">そのままコピーしてAIに貼るだけ</span>https://github.com/thanatos333/agent-hands-kit/blob/main/SETUP.md の導入ガイドを読んで、このWindows PCに Agent Hands Kit をセットアップしてください。手順はガイドの「Way C」に従うこと。部品ごとに検証まで行い、結果行（成功は _OK で終わる行）を見せてください。Desktop Agent のスクリーンショット確認は省略しないこと。失敗したら、エラーと対処を見せてから続けてください。最後に、何がどこに入ったか短くまとめてください。</div>
+    <div class="note"><b>何が起きる？</b> AIがリポジトリを取得し、Desktop Agent をビルドして常駐タスクを登録し、道具一式を配置して、部品ごとに動作確認まで行います。あなたの作業は、見守ることと、AIから質問が来たら答えることだけです。所要時間は数分程度（初回のビルドが大半）です。</div>
+  </section>
+
+  <section id="way-b">
+    <h2>方法B：チャットAIに先生役を頼む</h2>
+    <p class="sub">ChatGPT、Gemini、Copilot、Claude の通常チャットなど、<b>チャット専用のAIはあなたのPCを直接触れません</b>。でも「先生役」としては優秀です。あなたが手を動かし、AIが次の一手を教えてくれます。</p>
+    <div class="prompt"><span class="lbl">最初にこの文を貼る</span>あなたは私のセットアップの先生です。このガイドを読んでください：
+https://github.com/thanatos333/agent-hands-kit/blob/main/SETUP.md
+私は Windows PC に Agent Hands Kit を「Way C」の手順で入れます。
+一歩ずつ案内してください：やることを1つだけ具体的に伝え、私が「できた」と返事するかスクリーンショットを送るまで次に進まないでください。
+エラー文を貼ったら、専門用語なしで意味と対処を教えてください。ガイド全文を一度に出さないでください。</div>
+    <ol class="steps" style="margin-top:18px">
+      <li><b class="t">AIの指示どおりに1つずつ進める</b><p>クリックや入力はあなたの手で行います。急がず1ステップずつで大丈夫です。</p></li>
+      <li><b class="t">詰まったらスクリーンショットを送る</b><p>画面の状態を言葉で説明するより、スクショ1枚が一番早いです。「思っていた画面と違う」ときほど送ってください。</p></li>
+      <li><b class="t">確認のたびに「最後の1行」を貼る</b><p>このキットの道具は、結果を最後の1行で返します。成功は <code>_OK</code> で終わる行、失敗は <code>_FAILED</code> と理由です。その1行をAIに貼れば、成功したかどうかを正確に判断してもらえます。</p></li>
+    </ol>
+  </section>
+
+  <section id="way-c">
+    <h2>方法C：自分で入れる（全手順）</h2>
+    <p class="sub">使う部品だけ入れればOKです。中心は Desktop Agent で、ほかは任意・独立です。コマンドは PowerShell にそのまま貼れます。</p>
+
+    <h3>ステップ0：ファイルを手に入れる</h3>
+    <ol class="steps">
+      <li><b class="t">ダウンロードする</b><p>GitHub のリポジトリページで <b>Code → Download ZIP</b> を押し、好きな場所（例：<code>C:\agent-hands-kit</code>）に展開します。git がある人は <code>git clone https://github.com/thanatos333/agent-hands-kit.git</code> でもOKです。</p></li>
+    </ol>
+
+    <h3>ステップ1：Desktop Agent（画面を見る・操作する手足）</h3>
+    <ol class="steps">
+      <li><b class="t">.NET 10 SDK を入れる</b><p>Microsoft の公式サイトから無料で入れられます。入れたら PowerShell を開き直して <code>dotnet --version</code> と打ち、バージョンが表示されればOKです。</p></li>
+      <li><b class="t">ビルドして配置する</b><p>展開したフォルダの中で次を実行します。置き場所は <code>%USERPROFILE%\tools\desktop-agent\</code> で固定です。</p>
+      <pre><code>dotnet publish components\desktop-agent -c Release -o $env:USERPROFILE\tools\desktop-agent</code></pre></li>
+      <li><b class="t">ログオン時の自動起動を登録する</b><p>タスク名は <code>AronaDesktopAgent</code> で固定してください（クライアントがこの名前を探します）。</p>
+      <pre><code>$exe = "$env:USERPROFILE\tools\desktop-agent\desktop-agent.exe"
+$action    = New-ScheduledTaskAction -Execute $exe -Argument "serve"
+$trigger   = New-ScheduledTaskTrigger -AtLogOn
+$principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Highest
+Register-ScheduledTask -TaskName "AronaDesktopAgent" -Action $action -Trigger $trigger -Principal $principal
+Start-ScheduledTask -TaskName "AronaDesktopAgent"</code></pre>
+      <p>初回起動時に、アクセス用のトークンが自動生成されます（あなたが触る必要はありません）。タスクトレイにアイコンが出れば常駐中です。</p></li>
+      <li><b class="t">動作確認（ここだけは省略しないで）</b><p>状態表示と、試しにスクリーンショットを1枚撮ります。</p>
+      <pre><code>&amp; $env:USERPROFILE\tools\desktop-agent\desktop-agent.exe status
+&amp; $env:USERPROFILE\tools\desktop-agent\desktop-agent.exe screenshot --scale 0.5</code></pre>
+      <p>スクリーンショットは <code>%USERPROFILE%\tools\desktop-agent\shots\</code> に保存されます。開いて、自分の画面が写っていれば成功です。これでAIから <code>desktop.ps1</code> 経由でデスクトップを操作できるようになりました。コマンド一覧はリポジトリの <code>components/desktop-agent/README.md</code> にあります。</p></li>
+    </ol>
+
+    <h3>ステップ2：PowerShell 道具群</h3>
+    <ol class="steps">
+      <li><b class="t">置き場所を決めてコピーする</b><p>例として <code>C:\agent-home</code> を作り、<code>components\powershell-tools\</code> と <code>components\app-wrappers\</code> の中身を <code>C:\agent-home\tools\</code> にコピーします。</p></li>
+      <li><b class="t">環境変数 AGENT_HOME を設定する</b><p>道具たちが自分のホームとして参照する変数です。1回だけ設定します。</p>
+      <pre><code>[Environment]::SetEnvironmentVariable('AGENT_HOME', 'C:\agent-home', 'User')</code></pre></li>
+      <li><b class="t">新しい PowerShell で試す</b><p>ウィンドウを開き直して（変数を読み込むため）から実行します。</p>
+      <pre><code>powershell -ExecutionPolicy Bypass -File C:\agent-home\tools\tool-help.ps1</code></pre>
+      <p>「スクリプトの実行が無効」と言われたら、コマンド例にある <code>-ExecutionPolicy Bypass</code> を付ければその場限りで実行できます。一覧は <code>components/powershell-tools/INDEX.md</code>。なお <code>delegate.ps1</code> など一部は作者の環境向けの作例なので、使う場合は自分の環境に合わせて調整してください。</p></li>
+    </ol>
+
+    <h3>ステップ3：アプリ実行ラッパー</h3>
+    <ol class="steps">
+      <li><b class="t">設定は不要。まず画像プレビューで試す</b><p>ラッパーはアプリのインストール場所を自動で探します。まずはアプリ不要の <code>img-peek</code> で感触を掴んでください。</p>
+      <pre><code>powershell -ExecutionPolicy Bypass -File C:\agent-home\tools\img-peek.ps1 -Image C:\path\to\any.png
+# 最後の行が IMGPEEK_OK ... なら成功</code></pre></li>
+      <li><b class="t">使いたいアプリで実行する</b><p>例：Blender に自分のスクリプトを実行させる。</p>
+      <pre><code>powershell -ExecutionPolicy Bypass -File C:\agent-home\tools\blender-run.ps1 -Script C:\path\to\your_script.py</code></pre>
+      <p>成否は終了コードではなく「宣言した成果物ができたか」で判定されます。詳細は <code>components/app-wrappers/INDEX.md</code>。</p></li>
+    </ol>
+
+    <h3>ステップ4：VOICEVOX ハーネス（任意・音声合成）</h3>
+    <ol class="steps">
+      <li><b class="t">VOICEVOX と Python の準備</b><p>VOICEVOX を公式サイトからインストール（既定の場所でOK）。Python 3 も入れておきます。</p></li>
+      <li><b class="t">ハーネスを置いて、仮想環境を作る</b>
+      <pre><code>copy components\voicevox-harness\vv_harness.py C:\agent-home\tools\
+copy components\voicevox-harness\vv-say.ps1   C:\agent-home\tools\
+cd C:\agent-home\tools
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install numpy soundfile</code></pre></li>
+      <li><b class="t">試しに喋らせる</b><p>話者 10 は「雨晴はう（ノーマル）」です。エンジンは未起動なら自動で立ち上がります。</p>
+      <pre><code>powershell -ExecutionPolicy Bypass -File C:\agent-home\tools\vv-say.ps1 -Text "はじめまして。私の声、聞こえてますか？" -Speaker 10
+# 最後の行が VV_OK &lt;wavのパス&gt; なら成功。WAV を再生して聞いてみてください</code></pre>
+      <p>合成前にアクセントとピッチの計画が表示され、出力は基本周波数（F0）の実測で検証されます。詳細は <code>components/voicevox-harness/README.md</code>。</p></li>
+    </ol>
+    <div class="note"><b>通知ウォッチャー（任意）</b> — Windows の通知をAIへの合図に変える補助ツールです。ソースは <code>components/notification-watcher/</code>。初日は飛ばして問題ありません。</div>
+  </section>
+
+  <section id="connect">
+    <h2>AIとのつなぎ方</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="tag">同じPCのAI</span>
+        <h3>そのまま使えます</h3>
+        <p>Claude Code やローカルLLMなど、同じPCで動くAIは、上記のコマンドをそのまま実行できます。各部品の README と INDEX は「AIに読ませる」前提で書かれているので、場所を教えてあげてください。</p>
+      </div>
+      <div class="card">
+        <span class="tag">クラウドのAI</span>
+        <h3>PCへの道が1本必要</h3>
+        <p>クラウド側のAIからは、SSH（Tailscale等のプライベートネットワーク経由）でPCに入る方法と、共有フォルダを指示と成果物の受け渡し場所にする「ファイル郵便ポスト」を組み合わせます。Desktop Agent 自体は外に公開しません（PCの中だけで待ち受けます）。設計はリポジトリの <code>mailbox/</code> と <code>patterns/</code> にあります。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="check">
+    <h2>最終チェック：2分ドリル</h2>
+    <p class="sub">どの方法で入れた場合も、最後にこれだけ確認してください。</p>
+    <ul class="check">
+      <li>Desktop Agent でスクリーンショットを撮り、AIに「画面に何が写っているか」を説明させる</li>
+      <li>そのスクリーンショットを <code>img-peek.ps1</code> に渡し、最後の行が <code>IMGPEEK_OK</code> になる</li>
+      <li>（VOICEVOXを入れた場合）1文だけ合成して、最後の行が <code>VV_OK</code> になる</li>
+    </ul>
+    <p style="color:var(--muted)">全部通れば、あなたのAIに「目と手足」が付いた状態です。導入できると、AIがCADを操作してモデリングするようなことも可能になります（<a href="index.html#example">実例ページ</a>）。</p>
+    <img src="assets/example-hinge.jpg" alt="AIエージェントがCADを操作してモデリングした蝶番" style="width:100%;border-radius:10px;border:1px solid rgba(128,128,128,.35)">
+  </section>
+
+  <section id="trouble">
+    <h2>困ったときは</h2>
+    <table>
+      <tr><th style="width:34%">症状</th><th>意味と対処</th></tr>
+      <tr><td><code>dotnet</code> が見つからない</td><td class="c">.NET SDK が未インストールか、インストール前のウィンドウです。SDKを入れて、PowerShellを開き直してください</td></tr>
+      <tr><td>「スクリプトの実行が無効」と言われる</td><td class="c">実行例のように <code>-ExecutionPolicy Bypass</code> を付けるか、一度だけ <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code> を実行してください</td></tr>
+      <tr><td>トークンが無い／サーバーに繋がらない</td><td class="c">Desktop Agent 本体が起動していません。<code>Start-ScheduledTask -TaskName "AronaDesktopAgent"</code> で起動してから再試行してください</td></tr>
+      <tr><td>スクリーンショットが「ロック中」で拒否される</td><td class="c">仕様です。画面ロック中や Windows の確認ダイアログ（UAC）表示中は操作を受け付けません。ロックを解除して再試行してください</td></tr>
+      <tr><td>ラッパーが <code>_FAILED</code> で終わる</td><td class="c">同じ行に理由が書いてあります（対象アプリ未インストール、ファイル不足など）。まずその理由を確認してください</td></tr>
+      <tr><td><code>VV_FAILED no python found</code></td><td class="c"><code>vv-say.ps1</code> と同じフォルダに <code>.venv</code> を作る（ステップ4）か、環境変数 <code>VV_PYTHON</code> で Python を指定してください</td></tr>
+      <tr><td><code>VV_FAILED</code>（エンジン関連）</td><td class="c">VOICEVOX が未インストールか、エンジンが起動できていません。一度 VOICEVOX を手で起動してから再試行してください</td></tr>
+    </table>
+  </section>
+
+  <section id="safety">
+    <h2>安全について</h2>
+    <p style="color:var(--muted)">Desktop Agent は <code>127.0.0.1</code>（自分のPCの中）だけで待ち受け、利用者ごとのトークン認証が必須です。すべての操作はログに残り、トレイアイコンや <code>STOP</code> ファイルでいつでも止められます。「自分のPCを、自分のAIに」使うための道具です。詳しくはリポジトリの <code>SECURITY.md</code> を読んでください。GitHub版の詳細ガイドは <a href="https://github.com/thanatos333/agent-hands-kit/blob/main/SETUP.md">SETUP.md</a> にあります。</p>
+    <p><a class="btn primary" href="https://github.com/thanatos333/agent-hands-kit">GitHub で見る</a> <a class="btn" href="index.html">トップに戻る</a></p>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 thanatos333</span>
+    <span>MIT License</span>
+    <span style="flex:1"></span>
+    <a href="https://github.com/thanatos333/agent-hands-kit">GitHub</a>
+    <a href="en-setup.html">English</a>
+  </div>
+</footer>
+</body>
+</html>

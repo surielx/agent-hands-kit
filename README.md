@@ -6,6 +6,16 @@
 > 公式サイト：https://thanatos333.github.io/agent-hands-kit/
 > 本体はすべて実運用で使われている道具のサニタイズ済みコピーで、個人パス・固有名・秘密情報は除去してある。
 
+## Getting started — 導入はこちら
+
+**New here? Start with the [Setup Guide (SETUP.md)](SETUP.md).** It covers three ways to install, from easiest to most manual:
+
+1. **Let an AI agent do it** — give Claude Code (or another PC-operating AI) the guide link and one copy-paste instruction. Nothing else to do.
+2. **Chat AI as your coach** — ChatGPT / Gemini / Copilot walk you through it one step at a time; you send screenshots when stuck.
+3. **Manual setup** — full step-by-step: Desktop Agent build & startup task, PowerShell tools, app wrappers, and the optional VOICEVOX harness, each with a verification check.
+
+> 日本語：導入は **[導入ガイド (SETUP.md)](SETUP.md)** が入口です。AIに任せる方法（リンクを貼って「これを適用して」で完了）から、手順通りの手動セットアップまで、初心者向けに図解付きで書いてあります。
+
 ## 解く問題
 
 クラウド型パーソナルAI（例：Muse）の実行環境（VM）は、外へは接続できても、外から直接接続を受ける入り口がない。そのため、別のAIやPCからそのAIへ MCP 等で直接指示を出す構成は成立しない。
